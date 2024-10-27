@@ -29,7 +29,7 @@ def get_currency_rates_from_API():
     number_of_days = (datetime.datetime.now() - last_api_hit).days
 
     if number_of_days < 1:
-        return "Next API hit at: ", last_api_hit + datetime.timedelta(seconds=86400)
+        return "Next API hit at: {}".format((last_api_hit + datetime.timedelta(seconds=86400)).strftime("%A %d %b %Y %H:%M:%S %p"))
 
     print("Getting currency rates from API")
     URL = os.getenv("API_URL")

@@ -4,6 +4,6 @@ import currency
 
 def currency_rates():
     print(currency.get_currency_rates_from_API())
-    time.sleep(5)
+    time.sleep(2)
 
 currency_rates()
