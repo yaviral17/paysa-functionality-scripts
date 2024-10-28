@@ -25,6 +25,7 @@ def update_api_data_into_firestore(data):
 
 
 def get_currency_rates_from_API():
+    db.collection("global-data").document("currency-rates").update({"last_script_run": datetime.datetime.now().isoformat()})
     last_api_hit = get_last_api_hit()
     number_of_days = (datetime.datetime.now() - last_api_hit).days
 
@@ -36,6 +37,7 @@ def get_currency_rates_from_API():
     print(URL)
     result = requests.get(URL).json()
     result['last_api_hit'] = datetime.datetime.now().isoformat()    
+    result['last_script_run'] = datetime.datetime.now().isoformat()    
     update_api_data_into_firestore(result)
     print(result)
     return "Currency rates updated in Firestore at: " + result['last_api_hit']
